@@ -1,0 +1,472 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Origin | Premium Utility</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;800&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --bg-base: #000000;
+            --bg-section: #050505;
+            --accent: #FF3B30;
+            --text-main: #FFFFFF;
+            --text-muted: #888888;
+            --glass-bg: rgba(255, 255, 255, 0.02);
+            --glass-border: rgba(255, 255, 255, 0.05);
+            --glass-blur: blur(25px);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            background-color: var(--bg-base);
+            color: var(--text-main);
+            font-family: 'Inter', sans-serif;
+            overflow-x: hidden;
+            line-height: 1.6;
+        }
+
+        /* Typography */
+        h1, h2, h3 {
+            font-weight: 800;
+            letter-spacing: -0.03em;
+        }
+
+        p {
+            color: var(--text-muted);
+            font-weight: 300;
+        }
+
+        .eyebrow {
+            text-transform: uppercase;
+            letter-spacing: 0.3em;
+            color: var(--accent);
+            font-size: 0.75rem;
+            font-weight: 600;
+            margin-bottom: 1rem;
+            display: inline-block;
+        }
+
+        /* Buttons */
+        .btn {
+            background-color: var(--accent);
+            color: #fff;
+            padding: 0.75rem 1.75rem;
+            border-radius: 8px;
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 0.9rem;
+            transition: all 0.3s ease;
+            border: 1px solid transparent;
+            cursor: pointer;
+            display: inline-block;
+        }
+
+        .btn:hover {
+            box-shadow: 0 0 20px rgba(255, 59, 48, 0.4);
+            transform: translateY(-2px);
+        }
+
+        .btn-outline {
+            background-color: transparent;
+            border: 1px solid var(--glass-border);
+        }
+
+        .btn-outline:hover {
+            background-color: var(--glass-bg);
+            border-color: var(--accent);
+            box-shadow: none;
+        }
+
+        /* Navigation */
+        nav {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            padding: 1rem 5%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            z-index: 100;
+            background: rgba(0, 0, 0, 0.5);
+            backdrop-filter: var(--glass-blur);
+            border-bottom: 1px solid var(--glass-border);
+        }
+
+        .nav-logo {
+            height: 40px;
+            width: auto;
+            display: flex;
+            align-items: center;
+        }
+
+        .nav-logo img {
+            height: 100%;
+            object-fit: contain;
+        }
+
+        /* Hero Section */
+        .hero {
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            padding: 8rem 5% 4rem;
+            position: relative;
+        }
+
+        .hero h1 {
+            font-size: clamp(3rem, 8vw, 6rem);
+            line-height: 1.1;
+            margin-bottom: 1.5rem;
+            letter-spacing: -0.05em;
+        }
+
+        .hero p {
+            font-size: clamp(1.1rem, 2vw, 1.5rem);
+            max-width: 600px;
+            margin-bottom: 3rem;
+        }
+
+        /* Product Showcase */
+        .showcase-wrapper {
+            position: relative;
+            width: 100%;
+            max-width: 1000px;
+            margin: 0 auto;
+            perspective: 1000px;
+        }
+
+        .showcase-glow {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 70%;
+            height: 70%;
+            background: var(--accent);
+            filter: blur(120px);
+            opacity: 0.4;
+            z-index: 0;
+            animation: pulseGlow 4s ease-in-out infinite alternate;
+        }
+
+        @keyframes pulseGlow {
+            0% { opacity: 0.2; transform: translate(-50%, -50%) scale(0.9); }
+            100% { opacity: 0.5; transform: translate(-50%, -50%) scale(1.1); }
+        }
+
+        .showcase-img {
+            position: relative;
+            z-index: 1;
+            width: 100%;
+            border-radius: 16px;
+            border: 1px solid var(--glass-border);
+            background: var(--glass-bg);
+            backdrop-filter: var(--glass-blur);
+            box-shadow: 0 30px 60px rgba(0,0,0,0.8);
+            display: block;
+        }
+
+        /* Sections */
+        section {
+            padding: 8rem 5%;
+            background-color: var(--bg-section);
+        }
+
+        section:nth-child(even) {
+            background-color: var(--bg-base);
+        }
+
+        .section-header {
+            text-align: center;
+            margin-bottom: 5rem;
+        }
+
+        .section-header h2 {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+        }
+
+        /* Grid Layout & Cards */
+        .grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            gap: 2rem;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .card {
+            background: var(--glass-bg);
+            border: 1px solid var(--glass-border);
+            backdrop-filter: var(--glass-blur);
+            border-radius: 16px;
+            padding: 3rem 2rem;
+            position: relative;
+            overflow: hidden;
+            transition: transform 0.3s ease;
+        }
+
+        /* Mouse Follow Glow Effect */
+        .card::before {
+            content: '';
+            position: absolute;
+            top: 0; left: 0; right: 0; bottom: 0;
+            background: radial-gradient(800px circle at var(--mouse-x, 50%) var(--mouse-y, 50%), rgba(255,255,255,0.06), transparent 40%);
+            z-index: 0;
+            opacity: 0;
+            transition: opacity 0.3s ease;
+            pointer-events: none;
+        }
+
+        .card:hover::before {
+            opacity: 1;
+        }
+
+        .card-content {
+            position: relative;
+            z-index: 1;
+        }
+
+        .card h3 {
+            font-size: 1.5rem;
+            margin-bottom: 1rem;
+            color: var(--text-main);
+        }
+
+        .card.premium {
+            border: 1px solid rgba(255, 59, 48, 0.3);
+            box-shadow: 0 0 30px rgba(255, 59, 48, 0.05);
+        }
+
+        .card.premium::before {
+            background: radial-gradient(800px circle at var(--mouse-x, 50%) var(--mouse-y, 50%), rgba(255, 59, 48, 0.15), transparent 40%);
+        }
+
+        .price {
+            font-size: 3rem;
+            font-weight: 800;
+            margin: 1.5rem 0;
+            letter-spacing: -0.05em;
+        }
+
+        .price span {
+            font-size: 1rem;
+            color: var(--text-muted);
+            font-weight: 400;
+        }
+
+        ul.features-list {
+            list-style: none;
+            margin: 2rem 0;
+        }
+
+        ul.features-list li {
+            margin-bottom: 1rem;
+            color: var(--text-muted);
+            display: flex;
+            align-items: center;
+        }
+
+        ul.features-list li::before {
+            content: '';
+            display: inline-block;
+            width: 6px;
+            height: 6px;
+            background: var(--accent);
+            border-radius: 50%;
+            margin-right: 12px;
+        }
+
+        /* Footer */
+        footer {
+            text-align: center;
+            padding: 4rem 5%;
+            border-top: 1px solid var(--glass-border);
+            background: var(--bg-base);
+        }
+
+        footer p {
+            font-size: 0.9rem;
+        }
+
+        /* Scroll Reveal Animations */
+        .reveal {
+            opacity: 0;
+            transform: translateY(40px);
+            transition: opacity 0.8s ease, transform 0.8s cubic-bezier(0.2, 0.8, 0.2, 1);
+        }
+
+        .reveal.active {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .delay-1 { transition-delay: 0.1s; }
+        .delay-2 { transition-delay: 0.2s; }
+        .delay-3 { transition-delay: 0.3s; }
+
+        @media (max-width: 768px) {
+            .hero { padding-top: 6rem; }
+            .grid { grid-template-columns: 1fr; }
+            .section-header h2 { font-size: 2.5rem; }
+            .card { padding: 2rem 1.5rem; }
+        }
+    </style>
+</head>
+<body>
+
+    <nav>
+        <a href="#" class="nav-logo">
+            <img src="https://cdn.discordapp.com/attachments/1368533900967546973/1487448746156626143/Gemini_Generated_Image_k9ak0ak9ak0ak9ak-removebg-preview_1.png?ex=69c92e18&is=69c7dc98&hm=f7fefc0fc79592fdc411864beab8ba0af3189239b9432f44a99a8246fde31b3d" alt="Origin Logo">
+        </a>
+        <a href="#pricing" class="btn">Get Access</a>
+    </nav>
+
+    <header class="hero">
+        <span class="eyebrow reveal">Origin Utility</span>
+        <h1 class="reveal delay-1">The First Step.</h1>
+        <p class="reveal delay-2">The next generation of undetectable aimbot and ESP utility.</p>
+        
+        <div class="showcase-wrapper reveal delay-3">
+            <div class="showcase-glow"></div>
+            <img class="showcase-img" src="https://cdn.discordapp.com/attachments/1368533900967546973/1487448395206627509/Adobe_Express_-_file.png?ex=69c92dc4&is=69c7dc44&hm=7e2ccfd9d0e0fb0d3df50a00cd5bcb81407f77706ea8fffd9f65d7f571a84d27" alt="Origin Software UI">
+        </div>
+    </header>
+
+    <section id="features">
+        <div class="section-header reveal">
+            <span class="eyebrow">Capabilities</span>
+            <h2>Engineered for Dominance</h2>
+            <p>Built from the ground up for performance, precision, and complete stealth.</p>
+        </div>
+        <div class="grid">
+            <div class="card reveal delay-1">
+                <div class="card-content">
+                    <h3>Advanced Aimbot</h3>
+                    <p>Pinpoint accuracy meets humanized smoothing. Featuring adaptive bone selection, prediction models, and dynamic recoil control mapping.</p>
+                </div>
+            </div>
+            <div class="card reveal delay-2">
+                <div class="card-content">
+                    <h3>High-Fidelity ESP</h3>
+                    <p>Unmatched situational awareness. Crystal-clear overlays rendering custom skeletons, highly-accurate hitboxes, and intelligent loot tracking.</p>
+                </div>
+            </div>
+            <div class="card reveal delay-3">
+                <div class="card-content">
+                    <h3>Internal Security</h3>
+                    <p>Designed to never be seen. Operating through a Ring-0 hypervisor execution framework, ensuring your account remains permanently secure from anti-cheats.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="pricing">
+        <div class="section-header reveal">
+            <span class="eyebrow">Access</span>
+            <h2>Select Your Tier</h2>
+            <p>Premium slots are strictly limited to maintain absolute security.</p>
+        </div>
+        <div class="grid">
+            <div class="card reveal delay-1">
+                <div class="card-content">
+                    <h3>Standard</h3>
+                    <p>Essential utility for casual domination.</p>
+                    <div class="price">$30<span>/mo</span></div>
+                    <ul class="features-list">
+                        <li>Standard Aimbot</li>
+                        <li>Basic ESP Overlays</li>
+                        <li>Standard Security Module</li>
+                        <li>Email Support</li>
+                    </ul>
+                    <a href="#" class="btn btn-outline" style="width: 100%; text-align: center;">Select Standard</a>
+                </div>
+            </div>
+            
+            <div class="card premium reveal delay-2">
+                <div class="card-content">
+                    <span class="eyebrow" style="color: #fff;">Most Popular</span>
+                    <h3>Premium</h3>
+                    <p>Unrestricted access to our full suite.</p>
+                    <div class="price" style="color: var(--accent);">$100<span>/mo</span></div>
+                    <ul class="features-list">
+                        <li style="color: #fff;">Adaptive Aimbot & Prediction</li>
+                        <li style="color: #fff;">High-Fidelity ESP & Loot</li>
+                        <li style="color: #fff;">Ring-0 Hypervisor Access</li>
+                        <li style="color: #fff;">HWID Spoofer Included</li>
+                        <li style="color: #fff;">Priority 24/7 Support</li>
+                    </ul>
+                    <a href="#" class="btn" style="width: 100%; text-align: center;">Get Premium Access</a>
+                </div>
+            </div>
+
+            <div class="card reveal delay-3">
+                <div class="card-content">
+                    <h3>Pro</h3>
+                    <p>Advanced configurations for serious users.</p>
+                    <div class="price">$60<span>/mo</span></div>
+                    <ul class="features-list">
+                        <li>Advanced Aimbot</li>
+                        <li>Custom Skeleton ESP</li>
+                        <li>Enhanced Security Module</li>
+                        <li>Discord Ticket Support</li>
+                    </ul>
+                    <a href="#" class="btn btn-outline" style="width: 100%; text-align: center;">Select Pro</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <footer>
+        <p>&copy; 2024 Origin Utility. All rights reserved. Intended for educational purposes.</p>
+    </footer>
+
+    <script>
+        // Intersection Observer for Scroll Reveals
+        const observerOptions = {
+            root: null,
+            rootMargin: '0px',
+            threshold: 0.15
+        };
+
+        const observer = new IntersectionObserver((entries, observer) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('active');
+                    // Optional: Stop observing once revealed
+                    // observer.unobserve(entry.target);
+                }
+            });
+        }, observerOptions);
+
+        document.querySelectorAll('.reveal').forEach((el) => {
+            observer.observe(el);
+        });
+
+        // Mouse Follow Glow Effect on Cards
+        document.querySelectorAll('.card').forEach(card => {
+            card.addEventListener('mousemove', e => {
+                const rect = card.getBoundingClientRect();
+                const x = e.clientX - rect.left;
+                const y = e.clientY - rect.top;
+                
+                card.style.setProperty('--mouse-x', `${x}px`);
+                card.style.setProperty('--mouse-y', `${y}px`);
+            });
+        });
+    </script>
+</body>
+</html>
