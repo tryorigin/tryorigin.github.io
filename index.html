@@ -3,30 +3,25 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Origin | Redefining Precision</title>
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <title>Origin | Premium Utility</title>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;800&display=swap" rel="stylesheet">
-    
     <style>
-        /* CSS Variables - Blue Shift */
         :root {
-            --bg-black: #000000;
-            --bg-charcoal: #050505;
-            --accent-blue: #5C73B6;
+            --bg-base: #000000;
+            --bg-section: #050505;
+            --accent: #5C73B6;
+            --accent-rgb: 92, 115, 182;
             --text-main: #FFFFFF;
-            --text-muted: rgba(255, 255, 255, 0.5);
+            --text-muted: #888888;
             --glass-bg: rgba(255, 255, 255, 0.02);
-            --glass-border: rgba(255, 255, 255, 0.08);
-            --premium-glow: rgba(92, 115, 182, 0.3);
+            --glass-border: rgba(255, 255, 255, 0.05);
+            --glass-blur: blur(25px);
         }
 
-        /* Reset & Base Styles */
         * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
-            font-family: 'Inter', sans-serif;
         }
 
         html {
@@ -34,50 +29,22 @@
         }
 
         body {
-            background-color: var(--bg-black);
+            background-color: var(--bg-base);
             color: var(--text-main);
+            font-family: 'Inter', sans-serif;
             overflow-x: hidden;
-            -webkit-font-smoothing: antialiased;
-        }
-
-        /* Soft Mesh Gradient Background */
-        .mesh-bg {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100vw;
-            height: 100vh;
-            z-index: -1;
-            background: 
-                radial-gradient(circle at 15% 0%, rgba(255, 255, 255, 0.03) 0%, transparent 40%),
-                radial-gradient(circle at 80% 80%, rgba(92, 115, 182, 0.06) 0%, transparent 50%);
-            pointer-events: none;
+            line-height: 1.6;
         }
 
         /* Typography */
-        h1 {
-            font-size: clamp(3rem, 8vw, 6rem);
+        h1, h2, h3 {
             font-weight: 800;
-            letter-spacing: -0.04em;
-            line-height: 1.1;
-            margin-bottom: 1.5rem;
+            letter-spacing: -0.03em;
         }
 
-        h2 {
-            font-size: clamp(2rem, 5vw, 3rem);
-            font-weight: 600;
-            letter-spacing: -0.02em;
-            margin-bottom: 3rem;
-            text-align: center;
-        }
-
-        .subtitle {
-            font-size: clamp(1.2rem, 3vw, 1.5rem);
-            font-weight: 300;
+        p {
             color: var(--text-muted);
-            letter-spacing: 0.02em;
-            max-width: 600px;
-            margin: 0 auto 3rem auto;
+            font-weight: 300;
         }
 
         strong {
@@ -85,25 +52,45 @@
             font-weight: 600;
         }
 
+        .eyebrow {
+            text-transform: uppercase;
+            letter-spacing: 0.3em;
+            color: var(--accent);
+            font-size: 0.75rem;
+            font-weight: 600;
+            margin-bottom: 1rem;
+            display: inline-block;
+        }
+
         /* Buttons */
         .btn {
-            display: inline-block;
-            background: var(--accent-blue);
-            color: #ffffff;
-            padding: 1rem 2rem;
-            border-radius: 6px;
+            background-color: var(--accent);
+            color: #fff;
+            padding: 0.75rem 1.75rem;
+            border-radius: 8px;
             text-decoration: none;
             font-weight: 600;
-            letter-spacing: 0.05em;
+            font-size: 0.9rem;
             transition: all 0.3s ease;
             border: 1px solid transparent;
             cursor: pointer;
+            display: inline-block;
         }
 
         .btn:hover {
-            background: #4a5d96;
+            box-shadow: 0 0 20px rgba(var(--accent-rgb), 0.4);
             transform: translateY(-2px);
-            box-shadow: 0 10px 20px rgba(92, 115, 182, 0.2);
+        }
+
+        .btn-outline {
+            background-color: transparent;
+            border: 1px solid var(--glass-border);
+        }
+
+        .btn-outline:hover {
+            background-color: var(--glass-bg);
+            border-color: var(--accent);
+            box-shadow: none;
         }
 
         /* Navigation */
@@ -111,28 +98,26 @@
             position: fixed;
             top: 0;
             width: 100%;
+            padding: 1rem 5%;
             display: flex;
             justify-content: space-between;
             align-items: center;
-            padding: 1.5rem 5%;
             z-index: 100;
-            transition: all 0.4s ease;
-            border-bottom: 1px solid transparent;
-        }
-
-        nav.scrolled {
             background: rgba(0, 0, 0, 0.5);
-            backdrop-filter: blur(25px);
-            -webkit-backdrop-filter: blur(25px);
+            backdrop-filter: var(--glass-blur);
             border-bottom: 1px solid var(--glass-border);
-            padding: 1rem 5%;
         }
 
-        .logo {
-            font-weight: 800;
-            font-size: 1.25rem;
-            letter-spacing: 0.3em;
-            text-transform: uppercase;
+        .nav-logo {
+            height: 40px;
+            width: auto;
+            display: flex;
+            align-items: center;
+        }
+
+        .nav-logo img {
+            height: 100%;
+            object-fit: contain;
         }
 
         .nav-links {
@@ -141,207 +126,245 @@
             gap: 2rem;
         }
 
-        .nav-links a.text-link {
+        .nav-link {
             color: var(--text-muted);
             text-decoration: none;
-            font-size: 0.875rem;
-            font-weight: 400;
-            letter-spacing: 0.05em;
+            font-size: 0.9rem;
+            font-weight: 600;
             transition: color 0.3s ease;
         }
 
-        .nav-links a.text-link:hover {
+        .nav-link:hover {
             color: var(--text-main);
         }
 
-        .nav-btn {
-            padding: 0.75rem 1.5rem;
-            font-size: 0.875rem;
-        }
-
-        @media (max-width: 768px) {
-            .nav-links a.text-link {
-                display: none; /* Hide text links on mobile for minimal look */
-            }
-        }
-
-        /* Sections & Layout */
-        section {
-            padding: 8rem 5%;
+        /* Hero Section */
+        .hero {
             min-height: 100vh;
             display: flex;
             flex-direction: column;
-            justify-content: center;
             align-items: center;
+            justify-content: center;
+            text-align: center;
+            padding: 8rem 5% 4rem;
             position: relative;
         }
 
-        .charcoal-section {
-            background-color: var(--bg-charcoal);
-            border-top: 1px solid rgba(255, 255, 255, 0.03);
-            border-bottom: 1px solid rgba(255, 255, 255, 0.03);
+        .hero h1 {
+            font-size: clamp(3rem, 8vw, 6rem);
+            line-height: 1.1;
+            margin-bottom: 1.5rem;
+            letter-spacing: -0.05em;
         }
 
-        .hero {
-            text-align: center;
-            padding-top: 12rem;
+        .hero p {
+            font-size: clamp(1.1rem, 2vw, 1.5rem);
+            max-width: 600px;
+            margin-bottom: 3rem;
         }
 
-        .container {
+        /* Product Showcase */
+        .showcase-wrapper {
+            position: relative;
             width: 100%;
+            max-width: 1000px;
+            margin: 0 auto;
+            perspective: 1000px;
+        }
+
+        .showcase-glow {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 70%;
+            height: 70%;
+            background: var(--accent);
+            filter: blur(120px);
+            opacity: 0.4;
+            z-index: 0;
+            animation: pulseGlow 4s ease-in-out infinite alternate;
+        }
+
+        @keyframes pulseGlow {
+            0% { opacity: 0.2; transform: translate(-50%, -50%) scale(0.9); }
+            100% { opacity: 0.5; transform: translate(-50%, -50%) scale(1.1); }
+        }
+
+        .showcase-img {
+            position: relative;
+            z-index: 1;
+            width: 100%;
+            border-radius: 16px;
+            border: 1px solid var(--glass-border);
+            background: var(--glass-bg);
+            backdrop-filter: var(--glass-blur);
+            box-shadow: 0 30px 60px rgba(0,0,0,0.8);
+            display: block;
+        }
+
+        /* Sections */
+        section {
+            padding: 8rem 5%;
+            background-color: var(--bg-section);
+        }
+
+        section:nth-child(even) {
+            background-color: var(--bg-base);
+        }
+
+        .section-header {
+            text-align: center;
+            margin-bottom: 5rem;
+        }
+
+        .section-header h2 {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+        }
+
+        /* About Section */
+        .about-text-container {
+            max-width: 900px;
+            margin: 0 auto;
+            text-align: center;
+        }
+
+        .about-text-container p {
+            font-size: clamp(1.1rem, 2vw, 1.35rem);
+            line-height: 1.8;
+            color: var(--text-muted);
+        }
+
+        /* Grid Layout & Cards */
+        .grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            gap: 2rem;
             max-width: 1200px;
             margin: 0 auto;
         }
 
-        /* About Text */
-        .about-text {
-            color: var(--text-muted);
-            font-size: clamp(1rem, 2vw, 1.2rem);
-            line-height: 1.8;
-            text-align: center;
-            max-width: 900px;
-            margin: 0 auto;
-            font-weight: 300;
-        }
-
-        .grid-3 {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 2rem;
-            width: 100%;
-        }
-
-        /* Glass Cards */
-        .glass-card {
+        .card {
             background: var(--glass-bg);
-            backdrop-filter: blur(25px);
-            -webkit-backdrop-filter: blur(25px);
             border: 1px solid var(--glass-border);
-            border-radius: 12px;
+            backdrop-filter: var(--glass-blur);
+            border-radius: 16px;
             padding: 3rem 2rem;
             position: relative;
             overflow: hidden;
+            transition: transform 0.3s ease;
             display: flex;
             flex-direction: column;
-            transition: transform 0.3s ease, border-color 0.3s ease;
         }
 
-        .glass-card:hover {
-            transform: translateY(-5px);
-            border-color: rgba(255, 255, 255, 0.15);
-        }
-
-        .glass-card h3 {
-            font-size: 1.5rem;
-            font-weight: 600;
-            margin-bottom: 1rem;
-            letter-spacing: -0.01em;
-        }
-
-        .glass-card p {
-            color: var(--text-muted);
-            line-height: 1.6;
-            font-weight: 300;
-        }
-
-        /* Mouse Follow Glow */
-        .glow-card::before {
+        /* Mouse Follow Glow Effect */
+        .card::before {
             content: '';
             position: absolute;
-            top: var(--y, -100px);
-            left: var(--x, -100px);
-            width: 250px;
-            height: 250px;
-            background: radial-gradient(circle, rgba(255, 255, 255, 0.06) 0%, transparent 70%);
-            border-radius: 50%;
-            transform: translate(-50%, -50%);
-            pointer-events: none;
+            top: 0; left: 0; right: 0; bottom: 0;
+            background: radial-gradient(800px circle at var(--mouse-x, 50%) var(--mouse-y, 50%), rgba(255,255,255,0.06), transparent 40%);
+            z-index: 0;
             opacity: 0;
             transition: opacity 0.3s ease;
+            pointer-events: none;
         }
 
-        .glow-card:hover::before {
+        .card:hover::before {
             opacity: 1;
         }
 
-        /* Premium Card Specifics */
-        .premium-card {
-            border: 1px solid var(--premium-glow);
-            box-shadow: 0 0 30px rgba(92, 115, 182, 0.05);
+        .card-content {
+            position: relative;
+            z-index: 1;
+            flex-grow: 1;
+            display: flex;
+            flex-direction: column;
         }
 
-        .premium-card:hover {
-            border-color: var(--accent-blue);
-            box-shadow: 0 0 40px rgba(92, 115, 182, 0.15);
+        .card h3 {
+            font-size: 1.5rem;
+            margin-bottom: 1rem;
+            color: var(--text-main);
         }
 
-        .premium-card::before {
-            background: radial-gradient(circle, rgba(92, 115, 182, 0.15) 0%, transparent 70%);
+        .card.premium {
+            border: 1px solid rgba(var(--accent-rgb), 0.3);
+            box-shadow: 0 0 30px rgba(var(--accent-rgb), 0.05);
+            transform: scale(1.02);
+        }
+
+        .card.premium::before {
+            background: radial-gradient(800px circle at var(--mouse-x, 50%) var(--mouse-y, 50%), rgba(var(--accent-rgb), 0.15), transparent 40%);
         }
 
         .price {
-            font-size: 3rem;
+            font-size: 3.5rem;
             font-weight: 800;
             margin: 1.5rem 0;
+            letter-spacing: -0.05em;
         }
-        
+
         .price span {
             font-size: 1rem;
             color: var(--text-muted);
             font-weight: 400;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            margin-left: 0.5rem;
         }
 
-        .pricing-list {
+        ul.features-list {
             list-style: none;
-            margin-bottom: 2.5rem;
+            margin: 2rem 0;
             flex-grow: 1;
         }
 
-        .pricing-list li {
+        ul.features-list li {
+            margin-bottom: 1rem;
             color: var(--text-muted);
-            margin-bottom: 0.75rem;
-            font-size: 0.95rem;
             display: flex;
-            align-items: center;
+            align-items: flex-start;
+            line-height: 1.4;
         }
 
-        .pricing-list li::before {
-            content: "•";
-            color: var(--accent-blue);
-            font-weight: bold;
+        ul.features-list li::before {
+            content: '';
             display: inline-block;
-            width: 1em;
-            margin-left: -1em;
+            width: 6px;
+            height: 6px;
+            background: var(--accent);
+            border-radius: 50%;
+            margin-right: 12px;
+            margin-top: 8px;
+            flex-shrink: 0;
         }
 
-        .btn-ghost {
-            background: transparent;
-            border: 1px solid var(--glass-border);
-            text-align: center;
-        }
-
-        .btn-ghost:hover {
-            background: rgba(255,255,255,0.05);
-            box-shadow: none;
+        .btn-wrapper {
+            margin-top: auto;
+            width: 100%;
         }
 
         /* Footer */
         footer {
             text-align: center;
-            padding: 3rem 5%;
+            padding: 4rem 5%;
             border-top: 1px solid var(--glass-border);
-            color: var(--text-muted);
-            font-size: 0.875rem;
+            background: var(--bg-base);
         }
 
-        /* Animations */
-        .fade-up {
+        footer p {
+            font-size: 0.9rem;
+        }
+
+        /* Scroll Reveal Animations */
+        .reveal {
             opacity: 0;
             transform: translateY(40px);
-            transition: opacity 0.8s cubic-bezier(0.16, 1, 0.3, 1), transform 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+            transition: opacity 0.8s ease, transform 0.8s cubic-bezier(0.2, 0.8, 0.2, 1);
         }
 
-        .fade-up.visible {
+        .reveal.active {
             opacity: 1;
             transform: translateY(0);
         }
@@ -349,57 +372,73 @@
         .delay-1 { transition-delay: 0.1s; }
         .delay-2 { transition-delay: 0.2s; }
         .delay-3 { transition-delay: 0.3s; }
+
+        @media (max-width: 768px) {
+            .hero { padding-top: 6rem; }
+            .grid { grid-template-columns: 1fr; }
+            .section-header h2 { font-size: 2.5rem; }
+            .card { padding: 2rem 1.5rem; }
+            .card.premium { transform: scale(1); }
+            .nav-links { gap: 1rem; }
+            .nav-link { display: none; } /* Hide text links on mobile for minimal look, keep button */
+        }
     </style>
 </head>
 <body>
 
-    <!-- CSS Mesh Gradient Background -->
-    <div class="mesh-bg"></div>
-
-    <!-- Sticky Navigation -->
-    <nav id="navbar">
-        <div class="logo">ORIGIN</div>
+    <nav>
+        <a href="#" class="nav-logo">
+            <img src="https://cdn.discordapp.com/attachments/1368533900967546973/1487448746156626143/Gemini_Generated_Image_k9ak0ak9ak0ak9ak-removebg-preview_1.png?ex=69c92e18&is=69c7dc98&hm=f7fefc0fc79592fdc411864beab8ba0af3189239b9432f44a99a8246fde31b3d" alt="Origin Logo">
+        </a>
         <div class="nav-links">
-            <a href="#features" class="text-link">Features</a>
-            <a href="#faq" class="text-link">FAQ</a>
-            <a href="https://discord.gg/GnJSjfkYec" target="_blank" class="text-link">Discord</a>
-            <a href="https://tryorigin.github.io/purchase.html" class="btn nav-btn">Get Access</a>
+            <a href="#features" class="nav-link">Features</a>
+            <a href="#faq" class="nav-link">FAQ</a>
+            <a href="https://discord.gg/GnJSjfkYec" target="_blank" class="nav-link">Discord</a>
+            <a href="https://tryorigin.github.io/purchase.html" class="btn">Get Access</a>
         </div>
     </nav>
 
-    <!-- Hero Section -->
-    <section class="hero">
-        <div class="container fade-up">
-            <h1>Redefining Precision.</h1>
-            <p class="subtitle">The next generation of performance utility.</p>
-            <a href="#about" class="btn">Explore Platform</a>
+    <header class="hero">
+        <span class="eyebrow reveal">Origin Utility</span>
+        <h1 class="reveal delay-1">The First Step.</h1>
+        <p class="reveal delay-2">The next generation of undetectable aimbot and ESP utility.</p>
+        
+        <div class="showcase-wrapper reveal delay-3">
+            <div class="showcase-glow"></div>
+            <img class="showcase-img" src="https://cdn.discordapp.com/attachments/1368533900967546973/1487448395206627509/Adobe_Express_-_file.png?ex=69c92dc4&is=69c7dc44&hm=7e2ccfd9d0e0fb0d3df50a00cd5bcb81407f77706ea8fffd9f65d7f571a84d27" alt="Origin Software UI">
         </div>
-    </section>
+    </header>
 
-    <!-- About Section (Charcoal base) -->
-    <section id="about" class="charcoal-section">
-        <div class="container fade-up">
-            <h2>The Origin Philosophy</h2>
-            <p class="about-text">
+    <section id="about">
+        <div class="about-text-container reveal">
+            <span class="eyebrow">The Philosophy</span>
+            <p>
                 <strong>Origin</strong> is a premium aim assist software engineered for high-level performance and total discretion. While many tools prioritize raw power, Origin is specifically built for <strong>closet cheaters</strong> who need a distinct competitive edge that remains completely invisible to spectators and manual review. The software is packed with <strong>rich features</strong> designed to give you granular control over every aspect of your gameplay. This level of customization makes it perfectly <strong>suitable for clanners and scrimmers</strong> who need to maintain a professional image while performing at a top-tier level. Despite its depth, the software remains lightweight and highly optimized to ensure zero frame drops during intense matches. Our codebase is built for long-term <strong>undetectability</strong>, providing a reliable, sophisticated advantage in the most demanding competitive environments.
             </p>
         </div>
     </section>
 
-    <!-- Feature Grid Section -->
     <section id="features">
-        <div class="container">
-            <h2 class="fade-up">Technical Specifications</h2>
-            <div class="grid-3">
-                <div class="glass-card glow-card fade-up delay-1">
+        <div class="section-header reveal">
+            <span class="eyebrow">Capabilities</span>
+            <h2>Engineered for Dominance</h2>
+            <p>Built from the ground up for performance, precision, and complete stealth.</p>
+        </div>
+        <div class="grid">
+            <div class="card reveal delay-1">
+                <div class="card-content">
                     <h3>Advanced Aimbot</h3>
                     <p>Pinpoint accuracy meets humanized smoothing. Featuring <strong>customizable X and Y axis smoothing, advanced player checks, and subtle micro-adjustment offsets</strong> that keep your aim looking completely natural.</p>
                 </div>
-                <div class="glass-card glow-card fade-up delay-2">
+            </div>
+            <div class="card reveal delay-2">
+                <div class="card-content">
                     <h3>High-Fidelity ESP</h3>
                     <p>Unmatched situational awareness. Featuring minimalist player boxes, visibility indicators, and subtle distance markers for a clean, natural-looking overlay.</p>
                 </div>
-                <div class="glass-card glow-card fade-up delay-3">
+            </div>
+            <div class="card reveal delay-3">
+                <div class="card-content">
                     <h3>Full Undetectability</h3>
                     <p>Unmatched security and total peace of mind. Featuring built-in anti-cheat bypasses, advanced obfuscation, and automated thread cleanup to keep your account safe from detection.</p>
                 </div>
@@ -407,111 +446,103 @@
         </div>
     </section>
 
-    <!-- Pricing Section (Charcoal base) -->
-    <section id="pricing" class="charcoal-section">
-        <div class="container">
-            <h2 class="fade-up">Lifetime Access Tiers</h2>
-            <div class="grid-3">
-                <!-- Standard -->
-                <div class="glass-card glow-card fade-up delay-1">
+    <section id="pricing">
+        <div class="section-header reveal">
+            <span class="eyebrow">Access</span>
+            <h2>Select Your Tier</h2>
+            <p>Secure your permanent advantage today.</p>
+        </div>
+        <div class="grid">
+            <div class="card reveal delay-1">
+                <div class="card-content">
                     <h3>Standard</h3>
-                    <p>Essential utility architecture.</p>
-                    <div class="price">$13<span>/lifetime</span></div>
-                    <ul class="pricing-list">
+                    <p>Essential utility for casual domination.</p>
+                    <div class="price">$13<span>Lifetime</span></div>
+                    <ul class="features-list">
                         <li>Advanced Customizable Aimbot</li>
                         <li>High-Fidelity ESP Overlays</li>
                         <li>Internal Security Module</li>
                         <li>Lifetime Access</li>
                     </ul>
-                    <a href="https://tryorigin.github.io/purchase.html" class="btn btn-ghost">Select Standard</a>
+                    <div class="btn-wrapper">
+                        <a href="https://tryorigin.github.io/purchase.html" class="btn btn-outline" style="width: 100%; text-align: center;">Select Standard</a>
+                    </div>
                 </div>
-
-                <!-- Pro -->
-                <div class="glass-card glow-card fade-up delay-2">
+            </div>
+            
+            <div class="card reveal delay-2">
+                <div class="card-content">
                     <h3>Pro</h3>
-                    <p>Advanced system deployment.</p>
-                    <div class="price">$17<span>/lifetime</span></div>
-                    <ul class="pricing-list">
-                        <li>All Standard Features</li>
+                    <p>Advanced configurations for serious users.</p>
+                    <div class="price">$17<span>Lifetime</span></div>
+                    <ul class="features-list">
+                        <li>All Standard features</li>
                         <li><strong>Priority Support</strong></li>
                         <li><strong>Early Beta Access to Updates</strong></li>
-                        <li>Lifetime Access</li>
                     </ul>
-                    <a href="https://tryorigin.github.io/purchase.html" class="btn btn-ghost">Select Pro</a>
+                    <div class="btn-wrapper">
+                        <a href="https://tryorigin.github.io/purchase.html" class="btn btn-outline" style="width: 100%; text-align: center;">Select Pro</a>
+                    </div>
                 </div>
+            </div>
 
-                <!-- Premium -->
-                <div class="glass-card glow-card premium-card fade-up delay-3">
+            <div class="card premium reveal delay-3">
+                <div class="card-content">
+                    <span class="eyebrow" style="color: #fff;">Most Popular</span>
                     <h3>Premium</h3>
-                    <p>Unrestricted elite performance.</p>
-                    <div class="price">$20<span>/lifetime</span></div>
-                    <ul class="pricing-list">
-                        <li>All Pro Features</li>
-                        <li><strong>Cloud-Synced Configurations</strong></li>
-                        <li><strong>Exclusive Private Discord Role</strong></li>
-                        <li>Lifetime Access</li>
+                    <p>Unrestricted access to our full suite.</p>
+                    <div class="price" style="color: var(--accent);">$20<span>Lifetime</span></div>
+                    <ul class="features-list">
+                        <li style="color: #fff;">All Pro features</li>
+                        <li style="color: #fff;"><strong>Exclusive Private Discord Role</strong></li>
+                        <li style="color: #fff;"><strong>Direct Developer Support</strong></li>
                     </ul>
-                    <a href="https://tryorigin.github.io/purchase.html" class="btn">Initialize Premium</a>
+                    <div class="btn-wrapper">
+                        <a href="https://tryorigin.github.io/purchase.html" class="btn" style="width: 100%; text-align: center;">Get Premium Access</a>
+                    </div>
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- Footer -->
-    <footer id="faq">
-        <p>&copy; 2024 Origin. All rights reserved.</p>
+    <section id="faq" style="padding-top: 0; padding-bottom: 4rem;">
+        <!-- Placeholder for FAQ anchor navigation mapping -->
+    </section>
+
+    <footer>
+        <p>&copy; 2024 Origin Utility. All rights reserved. Intended for educational purposes.</p>
     </footer>
 
     <script>
-        document.addEventListener('DOMContentLoaded', () => {
-            
-            // 1. Sticky Nav Blur/Border on Scroll
-            const nav = document.getElementById('navbar');
-            window.addEventListener('scroll', () => {
-                if (window.scrollY > 50) {
-                    nav.classList.add('scrolled');
-                } else {
-                    nav.classList.remove('scrolled');
+        // Intersection Observer for Scroll Reveals
+        const observerOptions = {
+            root: null,
+            rootMargin: '0px',
+            threshold: 0.15
+        };
+
+        const observer = new IntersectionObserver((entries, observer) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('active');
                 }
             });
+        }, observerOptions);
 
-            // 2. Intersection Observer for Fade-up and Slide-up Animations
-            const observerOptions = {
-                root: null,
-                rootMargin: '0px',
-                threshold: 0.15
-            };
+        document.querySelectorAll('.reveal').forEach((el) => {
+            observer.observe(el);
+        });
 
-            const observer = new IntersectionObserver((entries, observer) => {
-                entries.forEach(entry => {
-                    if (entry.isIntersecting) {
-                        entry.target.classList.add('visible');
-                        observer.unobserve(entry.target); // Run once
-                    }
-                });
-            }, observerOptions);
-
-            // Select all fade-up elements across the document
-            document.querySelectorAll('.fade-up').forEach(el => {
-                observer.observe(el);
+        // Mouse Follow Glow Effect on Cards
+        document.querySelectorAll('.card').forEach(card => {
+            card.addEventListener('mousemove', e => {
+                const rect = card.getBoundingClientRect();
+                const x = e.clientX - rect.left;
+                const y = e.clientY - rect.top;
+                
+                card.style.setProperty('--mouse-x', `${x}px`);
+                card.style.setProperty('--mouse-y', `${y}px`);
             });
-
-            // 3. Mouse-Follow Glow Effect for Glass Cards
-            const glowCards = document.querySelectorAll('.glow-card');
-            
-            glowCards.forEach(card => {
-                card.addEventListener('mousemove', (e) => {
-                    const rect = card.getBoundingClientRect();
-                    // Calculate mouse position relative to the card
-                    const x = e.clientX - rect.left;
-                    const y = e.clientY - rect.top;
-                    
-                    // Update CSS custom properties
-                    card.style.setProperty('--x', `${x}px`);
-                    card.style.setProperty('--y', `${y}px`);
-                });
-            });
-
         });
     </script>
 </body>
