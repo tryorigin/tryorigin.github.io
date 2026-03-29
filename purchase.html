@@ -1,1 +1,435 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Origin | Secure Checkout</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;800&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --bg-base: #000000;
+            --bg-section: #050505;
+            --accent: #5C73B6;
+            --accent-rgb: 92, 115, 182;
+            --text-main: #FFFFFF;
+            --text-muted: #888888;
+            --glass-bg: rgba(255, 255, 255, 0.02);
+            --glass-border: rgba(255, 255, 255, 0.05);
+            --glass-blur: blur(20px);
+        }
 
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            background-color: var(--bg-base);
+            color: var(--text-main);
+            font-family: 'Inter', sans-serif;
+            overflow-x: hidden;
+            line-height: 1.6;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+        }
+
+        /* Typography */
+        h1, h2, h3 {
+            font-weight: 800;
+            letter-spacing: -0.03em;
+        }
+
+        p {
+            color: var(--text-muted);
+            font-weight: 300;
+        }
+
+        strong {
+            color: var(--text-main);
+            font-weight: 600;
+        }
+
+        /* Buttons */
+        .btn {
+            background-color: var(--accent);
+            color: #fff;
+            padding: 0.75rem 1.75rem;
+            border-radius: 8px;
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 0.9rem;
+            transition: all 0.3s ease;
+            border: 1px solid transparent;
+            cursor: pointer;
+            display: inline-block;
+            text-align: center;
+        }
+
+        .btn:hover {
+            box-shadow: 0 0 20px rgba(var(--accent-rgb), 0.4);
+            transform: translateY(-2px);
+        }
+
+        .btn-outline {
+            background-color: transparent;
+            border: 1px solid var(--glass-border);
+        }
+
+        .btn-outline:hover {
+            background-color: var(--glass-bg);
+            border-color: var(--accent);
+            box-shadow: none;
+        }
+
+        /* Navigation */
+        nav {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            padding: 1rem 5%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            z-index: 100;
+            background: rgba(0, 0, 0, 0.5);
+            backdrop-filter: var(--glass-blur);
+            border-bottom: 1px solid var(--glass-border);
+        }
+
+        .nav-logo {
+            height: 40px;
+            width: auto;
+            display: flex;
+            align-items: center;
+        }
+
+        .nav-logo img {
+            height: 100%;
+            object-fit: contain;
+        }
+
+        .nav-links {
+            display: flex;
+            align-items: center;
+            gap: 2rem;
+        }
+
+        .nav-link {
+            color: var(--text-muted);
+            text-decoration: none;
+            font-size: 0.9rem;
+            font-weight: 600;
+            transition: color 0.3s ease;
+        }
+
+        .nav-link:hover {
+            color: var(--text-main);
+        }
+
+        /* Page Layout Container */
+        main {
+            flex-grow: 1;
+            padding: 8rem 5% 4rem;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        /* Header Section */
+        .checkout-header {
+            text-align: center;
+            margin-top: 2rem;
+            margin-bottom: 4rem;
+        }
+
+        .checkout-header h1 {
+            font-size: clamp(2.5rem, 5vw, 4rem);
+            margin-bottom: 1rem;
+        }
+
+        .checkout-header p {
+            font-size: 1.1rem;
+            max-width: 500px;
+            margin: 0 auto;
+        }
+
+        /* Grid Layout & Cards */
+        .grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            gap: 2rem;
+            width: 100%;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .card {
+            background: var(--glass-bg);
+            border: 1px solid var(--glass-border);
+            backdrop-filter: var(--glass-blur);
+            border-radius: 16px;
+            padding: 3rem 2rem;
+            position: relative;
+            overflow: hidden;
+            transition: transform 0.3s ease;
+            display: flex;
+            flex-direction: column;
+        }
+
+        /* Mouse Follow Glow Effect */
+        .card::before {
+            content: '';
+            position: absolute;
+            top: 0; left: 0; right: 0; bottom: 0;
+            background: radial-gradient(800px circle at var(--mouse-x, 50%) var(--mouse-y, 50%), rgba(255,255,255,0.06), transparent 40%);
+            z-index: 0;
+            opacity: 0;
+            transition: opacity 0.3s ease;
+            pointer-events: none;
+        }
+
+        .card:hover::before {
+            opacity: 1;
+        }
+
+        .card-content {
+            position: relative;
+            z-index: 1;
+            flex-grow: 1;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .card h3 {
+            font-size: 1.5rem;
+            margin-bottom: 0.5rem;
+            color: var(--text-main);
+        }
+
+        .card.premium {
+            border: 1px solid rgba(var(--accent-rgb), 0.4);
+            box-shadow: 0 0 40px rgba(var(--accent-rgb), 0.1);
+            transform: scale(1.02);
+        }
+
+        .card.premium::before {
+            background: radial-gradient(800px circle at var(--mouse-x, 50%) var(--mouse-y, 50%), rgba(var(--accent-rgb), 0.15), transparent 40%);
+        }
+
+        .price {
+            font-size: 3.5rem;
+            font-weight: 800;
+            margin: 1rem 0 1.5rem;
+            letter-spacing: -0.05em;
+        }
+
+        .price span {
+            font-size: 1rem;
+            color: var(--text-muted);
+            font-weight: 400;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            margin-left: 0.5rem;
+        }
+
+        ul.features-list {
+            list-style: none;
+            margin: 1.5rem 0 2.5rem;
+            flex-grow: 1;
+        }
+
+        ul.features-list li {
+            margin-bottom: 1rem;
+            color: var(--text-muted);
+            display: flex;
+            align-items: flex-start;
+            line-height: 1.4;
+            font-size: 0.95rem;
+        }
+
+        ul.features-list li::before {
+            content: '';
+            display: inline-block;
+            width: 6px;
+            height: 6px;
+            background: var(--accent);
+            border-radius: 50%;
+            margin-right: 12px;
+            margin-top: 8px;
+            flex-shrink: 0;
+        }
+
+        .btn-wrapper {
+            margin-top: auto;
+            width: 100%;
+        }
+
+        /* Security Note */
+        .security-note {
+            margin-top: 5rem;
+            text-align: center;
+            max-width: 600px;
+            font-family: monospace;
+            font-size: 0.85rem;
+            color: var(--text-muted);
+            opacity: 0.7;
+        }
+
+        /* Scroll Reveal Animations */
+        .reveal {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: opacity 0.8s ease, transform 0.8s cubic-bezier(0.2, 0.8, 0.2, 1);
+        }
+
+        .reveal.active {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .delay-1 { transition-delay: 0.1s; }
+        .delay-2 { transition-delay: 0.2s; }
+        .delay-3 { transition-delay: 0.3s; }
+
+        @media (max-width: 768px) {
+            main { padding-top: 6rem; }
+            .grid { grid-template-columns: 1fr; }
+            .card { padding: 2rem 1.5rem; }
+            .card.premium { transform: scale(1); }
+            .nav-links { gap: 1rem; }
+            .nav-link { display: none; }
+        }
+    </style>
+</head>
+<body>
+
+    <nav>
+        <a href="index.html" class="nav-logo">
+            <img src="https://cdn.discordapp.com/attachments/1368533900967546973/1487448746156626143/Gemini_Generated_Image_k9ak0ak9ak0ak9ak-removebg-preview_1.png?ex=69c92e18&is=69c7dc98&hm=f7fefc0fc79592fdc411864beab8ba0af3189239b9432f44a99a8246fde31b3d" alt="Origin Logo">
+        </a>
+        <div class="nav-links">
+            <a href="index.html#features" class="nav-link">Features</a>
+            <a href="index.html#faq" class="nav-link">FAQ</a>
+            <a href="https://discord.gg/GnJSjfkYec" target="_blank" class="nav-link">Discord</a>
+            <a href="index.html" class="btn btn-outline">Back to Home</a>
+        </div>
+    </nav>
+
+    <main>
+        <div class="checkout-header reveal">
+            <h1>Secure Your Access.</h1>
+            <p>Select a tier to proceed to our secure checkout.</p>
+        </div>
+
+        <div class="grid">
+            <!-- Standard Tier -->
+            <div class="card reveal delay-1">
+                <div class="card-content">
+                    <h3>Standard</h3>
+                    <div class="price">$13<span>Lifetime</span></div>
+                    <ul class="features-list">
+                        <li>Advanced Aimbot</li>
+                        <li>High-Fidelity ESP</li>
+                        <li>Internal Security</li>
+                        <li>Lifetime Access</li>
+                    </ul>
+                    <div class="btn-wrapper">
+                        <!-- PASTE LEMON SQUEEZY URL IN href BELOW -->
+                        <a href="#" class="btn btn-outline" style="width: 100%;">Buy Standard</a>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Pro Tier -->
+            <div class="card reveal delay-2">
+                <div class="card-content">
+                    <h3>Pro</h3>
+                    <div class="price">$17<span>Lifetime</span></div>
+                    <ul class="features-list">
+                        <li>All Standard features</li>
+                        <li><strong>Priority Support</strong></li>
+                        <li><strong>Early Beta Access</strong></li>
+                    </ul>
+                    <div class="btn-wrapper">
+                        <!-- PASTE LEMON SQUEEZY URL IN href BELOW -->
+                        <a href="#" class="btn btn-outline" style="width: 100%;">Buy Pro</a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Premium Tier -->
+            <div class="card premium reveal delay-3">
+                <div class="card-content">
+                    <span style="text-transform: uppercase; letter-spacing: 0.2em; color: var(--accent); font-size: 0.7rem; font-weight: 800; margin-bottom: 0.5rem; display: block;">Most Popular</span>
+                    <h3>Premium</h3>
+                    <div class="price" style="color: var(--accent);">$20<span>Lifetime</span></div>
+                    <ul class="features-list">
+                        <li style="color: #fff;">All Pro features</li>
+                        <li style="color: #fff;"><strong>Exclusive Private Discord Role</strong></li>
+                        <li style="color: #fff;"><strong>Direct Developer Support</strong></li>
+                    </ul>
+                    <div class="btn-wrapper">
+                        <!-- PASTE LEMON SQUEEZY URL IN href BELOW -->
+                        <a href="#" class="btn" style="width: 100%;">Buy Premium</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="security-note reveal delay-3">
+            // All transactions are encrypted and processed securely. Your license key will be delivered instantly to your email upon successful payment.
+        </div>
+    </main>
+
+    <script>
+        // Intersection Observer for Animations on Load/Scroll
+        const observerOptions = {
+            root: null,
+            rootMargin: '0px',
+            threshold: 0.1
+        };
+
+        const observer = new IntersectionObserver((entries, observer) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('active');
+                }
+            });
+        }, observerOptions);
+
+        document.querySelectorAll('.reveal').forEach((el) => {
+            observer.observe(el);
+        });
+
+        // Mouse Follow Glow Effect on Cards
+        document.querySelectorAll('.card').forEach(card => {
+            card.addEventListener('mousemove', e => {
+                const rect = card.getBoundingClientRect();
+                const x = e.clientX - rect.left;
+                const y = e.clientY - rect.top;
+                
+                card.style.setProperty('--mouse-x', `${x}px`);
+                card.style.setProperty('--mouse-y', `${y}px`);
+            });
+        });
+        
+        // Trigger reveal for elements instantly visible on load
+        window.addEventListener('load', () => {
+            setTimeout(() => {
+                document.querySelectorAll('.reveal').forEach(el => {
+                    const rect = el.getBoundingClientRect();
+                    if(rect.top < window.innerHeight) {
+                        el.classList.add('active');
+                    }
+                });
+            }, 100);
+        });
+    </script>
+</body>
+</html>
