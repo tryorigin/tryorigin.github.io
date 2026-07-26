@@ -1,0 +1,272 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Origin — PC & Roblox FPS Optimizer</title>
+<meta name="description" content="Origin tunes your Windows settings and builds custom Roblox graphics settings for your exact hardware. More FPS, less input lag.">
+<link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22 fill=%22%234C8DFF%22>◆</text></svg>">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600;700&family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+<div class="grain"></div>
+
+<header class="nav">
+  <div class="nav-inner">
+    <a href="index.html" class="logo">
+      <span class="logo-mark">◆</span>
+      <span class="logo-text">ORIGIN</span>
+    </a>
+    <nav class="nav-links">
+      <a href="#how">How it works</a>
+      <a href="#benchmarks">Benchmarks</a>
+      <a href="#tiers">Pricing</a>
+    </nav>
+    <a href="purchase.html" class="btn btn-primary btn-small">Get Origin</a>
+  </div>
+</header>
+
+<main>
+
+  <!-- HERO -->
+  <section class="hero">
+    <div class="hero-inner">
+      <div class="hero-copy">
+        <div class="eyebrow"><span class="dot"></span> WINDOWS + ROBLOX TUNING</div>
+        <h1>Your PC is holding<br>your FPS <span class="hl">hostage.</span></h1>
+        <p class="hero-sub">Origin scans your exact hardware, strips the Windows overhead choking your frame rate, and builds a Roblox settings profile made for your machine — not a generic list copied off a forum.</p>
+        <div class="hero-actions">
+          <a href="purchase.html" class="btn btn-primary">Get Origin — from $9</a>
+          <a href="#benchmarks" class="btn btn-ghost">See the benchmarks ↓</a>
+        </div>
+        <div class="hero-trust">
+          <span><strong>14,900+</strong> PCs optimized</span>
+          <span class="sep">·</span>
+          <span>Avg. <strong>+62% FPS</strong> in Roblox</span>
+        </div>
+      </div>
+
+      <div class="hero-panel" aria-hidden="true">
+        <div class="panel-head">
+          <span class="panel-title">FRAME OUTPUT — jailbreak.rbxl</span>
+          <span class="panel-live"><span class="live-dot"></span> LIVE</span>
+        </div>
+        <div class="panel-graph">
+          <svg viewBox="0 0 560 200" class="graph-svg" id="graphSvg">
+            <line x1="0" y1="150" x2="560" y2="150" class="graph-baseline" stroke-dasharray="2 6"/>
+            <polyline id="stockLine" class="stock-line" points="" />
+            <polyline id="optLine" class="opt-line" points="" />
+          </svg>
+          <div class="graph-legend">
+            <span class="legend-item"><i class="sw sw-stock"></i>Stock settings</span>
+            <span class="legend-item"><i class="sw sw-opt"></i>Origin-tuned</span>
+          </div>
+        </div>
+        <div class="panel-readout">
+          <div class="readout-cell">
+            <span class="readout-label">STOCK AVG</span>
+            <span class="readout-value stock" id="stockAvg">47</span>
+            <span class="readout-unit">FPS</span>
+          </div>
+          <div class="readout-arrow">→</div>
+          <div class="readout-cell">
+            <span class="readout-label">ORIGIN AVG</span>
+            <span class="readout-value opt" id="optAvg">142</span>
+            <span class="readout-unit">FPS</span>
+          </div>
+          <div class="readout-cell readout-delta">
+            <span class="readout-label">GAIN</span>
+            <span class="readout-value delta">+202%</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- LOGOS / STRIP -->
+  <section class="strip">
+    <div class="strip-inner">
+      <span>Tuned for:</span>
+      <span class="strip-item">Bloxstrap</span>
+      <span class="strip-item">Fluxus-safe</span>
+      <span class="strip-item">Intel + AMD</span>
+      <span class="strip-item">NVIDIA + AMD GPU</span>
+      <span class="strip-item">Windows 10 / 11</span>
+    </div>
+  </section>
+
+  <!-- HOW IT WORKS -->
+  <section class="how" id="how">
+    <div class="section-head">
+      <div class="eyebrow"><span class="dot"></span> THE PROCESS</div>
+      <h2>Three passes. One tuned machine.</h2>
+      <p class="section-sub">Origin doesn't hand you a generic .reg file. It reads your actual specs and decides what's safe to change.</p>
+    </div>
+
+    <div class="how-grid">
+      <div class="how-card">
+        <div class="how-index">SCAN</div>
+        <h3>Hardware read</h3>
+        <p>Origin detects your CPU, GPU, RAM, and storage type, then checks what's currently bottlenecking your Roblox client — background load, driver state, power plan, the works.</p>
+      </div>
+      <div class="how-card">
+        <div class="how-index">TUNE</div>
+        <h3>Windows pass</h3>
+        <p>Background services, power throttling, GPU scheduling, network buffering, and startup load get adjusted to your exact hardware. Nothing generic, nothing that breaks your OS.</p>
+      </div>
+      <div class="how-card">
+        <div class="how-index">BUILD</div>
+        <h3>Roblox profile</h3>
+        <p>Origin writes a graphics and physics settings profile calibrated to your GPU headroom — pushing render distance and shadows only as far as your hardware can actually hold framerate.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- BENCHMARKS -->
+  <section class="benchmarks" id="benchmarks">
+    <div class="section-head">
+      <div class="eyebrow"><span class="dot"></span> MEASURED, NOT MARKETED</div>
+      <h2>Results across real hardware tiers</h2>
+      <p class="section-sub">Tested in Roblox's heaviest titles — Blox Fruits, Jailbreak, The Strongest Battlegrounds — before and after an Origin pass.</p>
+    </div>
+
+    <div class="bench-table">
+      <div class="bench-row bench-head">
+        <span>Hardware class</span>
+        <span>Stock FPS</span>
+        <span>Origin FPS</span>
+        <span>Gain</span>
+      </div>
+      <div class="bench-row" data-stock="31" data-opt="58">
+        <span>Budget laptop <em>(iGPU, 8GB RAM)</em></span>
+        <span class="bench-num stock-num">31</span>
+        <span class="bench-num opt-num">58</span>
+        <span class="bench-gain">+87%</span>
+      </div>
+      <div class="bench-row" data-stock="74" data-opt="146">
+        <span>Mid tower <em>(GTX 1660 / R5 5600)</em></span>
+        <span class="bench-num stock-num">74</span>
+        <span class="bench-num opt-num">146</span>
+        <span class="bench-gain">+97%</span>
+      </div>
+      <div class="bench-row" data-stock="112" data-opt="238">
+        <span>High-end <em>(RTX 4070 / i7-13700K)</em></span>
+        <span class="bench-num stock-num">112</span>
+        <span class="bench-num opt-num">238</span>
+        <span class="bench-gain">+112%</span>
+      </div>
+      <div class="bench-row" data-stock="189" data-opt="401">
+        <span>Enthusiast <em>(RTX 4090 / 240Hz)</em></span>
+        <span class="bench-num stock-num">189</span>
+        <span class="bench-num opt-num">401</span>
+        <span class="bench-gain">+112%</span>
+      </div>
+    </div>
+    <p class="bench-footnote">Frame rate averaged over a 10-minute play session, uncapped. Individual results vary with background load and thermals.</p>
+  </section>
+
+  <!-- WHAT YOU GET -->
+  <section class="features">
+    <div class="section-head">
+      <div class="eyebrow"><span class="dot"></span> INSIDE THE APP</div>
+      <h2>What Origin actually touches</h2>
+    </div>
+    <div class="features-grid">
+      <div class="feature">
+        <span class="feature-tag">01</span>
+        <h3>Power & scheduling</h3>
+        <p>Forces high-performance power state, fixes core parking, and stops Windows from downclocking mid-match.</p>
+      </div>
+      <div class="feature">
+        <span class="feature-tag">02</span>
+        <h3>Background load</h3>
+        <p>Identifies and suspends non-essential startup processes and telemetry services eating CPU cycles in the background.</p>
+      </div>
+      <div class="feature">
+        <span class="feature-tag">03</span>
+        <h3>GPU scheduling</h3>
+        <p>Enables hardware-accelerated GPU scheduling where supported and matches driver settings to your card's actual headroom.</p>
+      </div>
+      <div class="feature">
+        <span class="feature-tag">04</span>
+        <h3>Network stack</h3>
+        <p>Tunes buffering and Nagle's algorithm behavior to cut input-to-server latency, not just visual smoothness.</p>
+      </div>
+      <div class="feature">
+        <span class="feature-tag">05</span>
+        <h3>Roblox graphics profile</h3>
+        <p>Generates a client settings file — render distance, shadow map, texture quality — matched to your GPU's real ceiling.</p>
+      </div>
+      <div class="feature">
+        <span class="feature-tag">06</span>
+        <h3>One-click revert</h3>
+        <p>Every change Origin makes is logged and reversible. Nothing permanent, nothing you can't undo in one pass.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- PRICING TEASER -->
+  <section class="pricing-teaser" id="tiers">
+    <div class="pt-inner">
+      <div class="pt-copy">
+        <div class="eyebrow"><span class="dot"></span> THREE TIERS</div>
+        <h2>Standard, Pro, or Premium.</h2>
+        <p>Every tier runs the full Windows + Roblox optimization pass. Higher tiers add re-optimization runs, priority support, and advanced network tuning.</p>
+      </div>
+      <a href="purchase.html" class="btn btn-primary">Compare tiers →</a>
+    </div>
+  </section>
+
+  <!-- FAQ -->
+  <section class="faq">
+    <div class="section-head">
+      <div class="eyebrow"><span class="dot"></span> BEFORE YOU ASK</div>
+      <h2>Questions people actually have</h2>
+    </div>
+    <div class="faq-list">
+      <details class="faq-item">
+        <summary>Will this get me banned from Roblox?</summary>
+        <p>No. Origin only adjusts Windows OS settings and writes standard Roblox client configuration files — the same settings you could change by hand in the in-game menu. It doesn't inject into the Roblox process, modify game memory, or touch anything Roblox's anti-cheat monitors.</p>
+      </details>
+      <details class="faq-item">
+        <summary>Does it work on laptops?</summary>
+        <p>Yes. Origin reads your actual hardware first, so a laptop with an integrated GPU gets a completely different tuning pass than a desktop with a dedicated card. It won't push settings your hardware can't sustain.</p>
+      </details>
+      <details class="faq-item">
+        <summary>Is it safe to run alongside antivirus?</summary>
+        <p>Origin doesn't run in the background or require elevated persistent access — it makes its pass, writes a change log, and exits. You can review every change before it's applied.</p>
+      </details>
+      <details class="faq-item">
+        <summary>What if I don't see an improvement?</summary>
+        <p>Every license includes a 7-day refund window if your benchmarked FPS doesn't improve. Details are on the purchase page for each tier.</p>
+      </details>
+    </div>
+  </section>
+
+  <!-- FINAL CTA -->
+  <section class="final-cta">
+    <h2>Stop playing on stock settings.</h2>
+    <p>Takes about four minutes. No reinstall, no reboot required.</p>
+    <a href="purchase.html" class="btn btn-primary btn-large">Get Origin</a>
+  </section>
+
+</main>
+
+<footer class="footer">
+  <div class="footer-inner">
+    <div class="footer-brand">
+      <span class="logo-mark">◆</span>
+      <span class="logo-text">ORIGIN</span>
+    </div>
+    <p class="footer-note">Origin is an independent optimization tool and is not affiliated with, endorsed by, or sponsored by Roblox Corporation or Microsoft.</p>
+    <p class="footer-copy">© 2026 Origin Softworks. All rights reserved.</p>
+  </div>
+</footer>
+
+<script src="script.js"></script>
+</body>
+</html>
